@@ -1,0 +1,97 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Send_Email" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_To" Type="InArgument(x:String)" />
+    <x:Property Name="in_Subject" Type="InArgument(x:String)" />
+    <x:Property Name="in_Body" Type="InArgument(x:String)" />
+    <x:Property Name="in_MailCredentials" Type="InArgument(x:String)" />
+    <x:Property Name="in_MailServerName" Type="InArgument(x:String)" />
+    <x:Property Name="in_FilePath" Type="InArgument(x:String)" />
+    <x:Property Name="in_CCMail" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>780,900</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Send_Email_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Net</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Description: Sends the mail to the team for success or failure of the process" DisplayName="Send Email" sap:VirtualizedContainerService.HintSize="740,820" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="ss:SecureString" Name="mailPassword" />
+      <Variable x:TypeArguments="x:String" Name="mailUsename" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log message" sap:VirtualizedContainerService.HintSize="702,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Sending the mail...&quot;]" />
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GetAppCredentials workflow" sap:VirtualizedContainerService.HintSize="702,86.6666666666667" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Framework\GetAppCredentials.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_Username">[mailUsename]</OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Credential">[in_MailCredentials]</InArgument>
+        <OutArgument x:TypeArguments="ss:SecureString" x:Key="out_Password">[mailPassword]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <If Condition="[in_FilePath &lt;&gt; string.Empty]" DisplayName="If Screen Shot" sap:VirtualizedContainerService.HintSize="702,303.333333333333" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <ui:SendExchangeMail Bcc="{x:Null}" Domain="{x:Null}" EmailAutodiscover="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;Hello&quot;+Environment.NewLine+Environment.NewLine+in_Body+Environment.NewLine+Environment.NewLine+&quot;Regards&quot;+Environment.NewLine+&quot;UIPath Robot&quot;]" Cc="[in_CCMail]" DisplayName="Send Mail to the team" ExchangeVersion="Exchange2007_SP1" sap:VirtualizedContainerService.HintSize="330,149.333333333333" sap2010:WorkflowViewState.IdRef="SendExchangeMail_3" IsBodyHtml="False" IsDraft="False" Password="[new System.Net.NetworkCredential(string.Empty, mailPassword).Password]" SaveCopy="True" Server="[in_MailServerName]" Subject="[in_Subject]" To="[in_To]" User="[mailUsename]">
+          <ui:SendExchangeMail.Files>
+            <InArgument x:TypeArguments="x:String">[in_FilePath]</InArgument>
+          </ui:SendExchangeMail.Files>
+        </ui:SendExchangeMail>
+      </If.Then>
+      <If.Else>
+        <ui:SendExchangeMail Bcc="{x:Null}" Domain="{x:Null}" EmailAutodiscover="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[in_Body]" Cc="[in_CCMail]" DisplayName="Send Mail to the team" ExchangeVersion="Exchange2007_SP1" sap:VirtualizedContainerService.HintSize="330,149.333333333333" sap2010:WorkflowViewState.IdRef="SendExchangeMail_4" IsBodyHtml="False" IsDraft="False" Password="[new System.Net.NetworkCredential(string.Empty, mailPassword).Password]" SaveCopy="True" Server="[in_MailServerName]" Subject="[in_Subject]" To="[in_To]" User="[mailUsename]" />
+      </If.Else>
+    </If>
+    <ui:LogMessage DisplayName="Log message" sap:VirtualizedContainerService.HintSize="702,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Mail sent sucessfully&quot;]" />
+  </Sequence>
+</Activity>

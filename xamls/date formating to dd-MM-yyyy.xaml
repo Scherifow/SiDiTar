@@ -1,0 +1,156 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="date_formating" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sg="clr-namespace:System.Globalization;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="Date_in" Type="InArgument(x:String)" />
+    <x:Property Name="Date_out_str" Type="OutArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>665,1240</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>date_formating_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="date formating" sap:VirtualizedContainerService.HintSize="625,1120" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="s:DateTime" Name="Date_out" />
+      <Variable x:TypeArguments="s:String[]" Name="arrstrDateFormats" />
+      <Variable x:TypeArguments="x:Boolean" Name="UnmatchedFormat" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Assign sap2010:Annotation.AnnotationText="Array of date formats (possible/predicted) in which your input date string is in." sap:VirtualizedContainerService.HintSize="603,121" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:String[]">[arrstrDateFormats]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:String[]" xml:space="preserve">[{"dd/MM/yyyy","ddMMyyyy","yyyyMMdd", "dd-MM-yyyy", "dd-MMM-yyyy", "dd.MM.yyyy","dd:MM:yyyy",
+"dd-MMM-yyyy HH:mm tt","dd-MMM-yy","dd MM yyyy","ddMMyyyy HH:mm:ss","yyyyMMdd HH:mm:ss","dd/MM/yyyy HH:mm:ss",
+"dd-MM-yyyy HH:mm:ss","MM-dd-yyyy HH:mm:ss","ddMMMyyyy","dd MM yyyy","ddMMMMMMMMyyyy",
+"ddMMMMMMMyyyy","ddMMyy","ddMMMMMMMMMyyyy","ddMMMMMyyyy","ddMMMMyyyy","ddMMMyyyy","MMM dd,yyyy",
+"MMMM dd,yyyy","MMMMM dd,yyyy","MMMMMM dd,yyyy","MMMMMMM dd,yyyy","MMMMMMMM dd,yyyy",
+"MMMMMMMMM dd,yyyy","dd-MMM-yyyy","dd-MMM-yyyy hh:mm:ss tt","dd-MMM-yyyy HH:mm","dd-MM-yyyy hh:mm:ss",
+"dd/MM/yyyy hh:mm tt","dd MMM yyyy","dd/MMM/yyyy","dd MMMM yyyy","dd MMMMM yyyy","dd MMMMMM yyyy",
+"dd MMMMMMM yyyy","dd MMMMMMMM yyyy","dd MMMMMMMMM yyyy","dd-MMMM-yyyy HH:mm tt","dd-MMMMM-yyyy HH:mm tt","dd-MMMMMM-yyyy HH:mm tt","dd-MMMMMMM-yyyy HH:mm tt","dd-MMMMMMMM-yyyy HH :mm tt","dd-MMMMMMMMM-yyyy HH:mm tt"}]</InArgument>
+      </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </Assign>
+    <InvokeMethod sap2010:Annotation.AnnotationText="TryParseExact" DisplayName="Invoke method" sap:VirtualizedContainerService.HintSize="603,159" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="TryParseExact" TargetType="s:DateTime">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <InArgument x:TypeArguments="x:String">[Date_in]</InArgument>
+      <InArgument x:TypeArguments="s:String[]">[arrstrDateFormats]</InArgument>
+      <InArgument x:TypeArguments="sg:CultureInfo">[new System.Globalization.CultureInfo("en-US")]</InArgument>
+      <InArgument x:TypeArguments="sg:DateTimeStyles">[System.Globalization.DateTimeStyles.None]</InArgument>
+      <OutArgument x:TypeArguments="s:DateTime">[Date_out]</OutArgument>
+    </InvokeMethod>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="Displaying the converted date into your desired format" DisplayName="Log message" sap:VirtualizedContainerService.HintSize="603,133" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Warn" Message="[&quot;Converted  date : &quot;+Date_out.ToString(&quot;dd-MM-yyyy&quot;)]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <If Condition="[Date_out.tostring(&quot;dd-MM-yyyy&quot;).Equals(&quot;01-01-0001&quot;)]" sap:VirtualizedContainerService.HintSize="603,463" sap2010:WorkflowViewState.IdRef="If_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence sap:VirtualizedContainerService.HintSize="336,315" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign sap:VirtualizedContainerService.HintSize="314,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[Date_out_str]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[Date_in]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="314,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="Date format does not matched*" />
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Assign sap2010:Annotation.AnnotationText="Converting datetime to string" sap:VirtualizedContainerService.HintSize="242,87" sap2010:WorkflowViewState.IdRef="Assign_2">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[Date_out_str]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">[Date_out.ToString("dd-MM-yyyy")]</InArgument>
+          </Assign.Value>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Assign>
+      </If.Else>
+    </If>
+  </Sequence>
+</Activity>
