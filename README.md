@@ -18,3 +18,7 @@ https://forum.uipath.com/t/about-xaml-files/390393/7
 https://github.com/essential-studio/xaml-ui-automation-winforms
 
 https://github.com/Uipathtutorials/UiPathLearningSamples
+
+https://github.com/FANMixco/masks-quotator-uipath
+
+https://github.com/szbartnik/SlowotokGameCheat/blob/master/S%C5%82owotokCheat/App.xaml
